@@ -1,0 +1,31 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, "Segoe UI", "Microsoft YaHei", sans-serif;
+  background: #f2f5fa;
+  color: #15263e;
+  line-height: 1.6;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: #2257a2; text-underline-offset: .2em; }
+a:focus-visible, summary:focus-visible { outline: 3px solid #3685d8; outline-offset: 4px; }
+.top, main, footer { max-width: 1120px; margin: auto; padding-inline: clamp(1rem, 4vw, 3rem); }
+.top { display: flex; align-items: center; justify-content: space-between; min-height: 76px; border-bottom: 1px solid #cbd8e9; }
+.top a { font-size: .875rem; text-decoration: none; }
+.top .brand { color: inherit; font-weight: 750; font-size: 1.05rem; }
+main { padding-block: clamp(1.5rem, 5vw, 3.5rem); }
+h1 { margin: 0; font-size: clamp(1.9rem, 5vw, 3.25rem); letter-spacing: -.035em; }
+.intro { margin: .4rem 0 1.6rem; color: #40536f; }
+.downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 1rem; align-items: stretch; }
+article { background: #fff; border: 1px solid #d3dfee; border-radius: 1rem; padding: 1.35rem; min-width: 0; }
+.platform { margin: 0 0 .25rem; color: #2d5f9f; font-size: .85rem; font-weight: 720; }
+h2 { margin: 0; font-size: 1.23rem; }
+article p:not(.platform) { color: #40536f; font-size: .92rem; margin: .35rem 0 .9rem; }
+.download { display: flex; justify-content: space-between; gap: .75rem; border-radius: .58rem; background: #163c74; color: white; font-weight: 675; text-decoration: none; padding: .56rem .7rem; }
+.download:hover { background: #215392; }
+.download span { font-weight: 480; white-space: nowrap; }
+.secondary, details { margin-top: .65rem; font-size: .83rem; }
+.secondary { display: block; }
+summary { cursor: pointer; max-width: max-content; }
+code { overflow-wrap: anywhere; font-size: .75rem; }
+footer { border-top: 1px solid #cbd8e9; padding-block: 1.1rem 1.6rem; font-size: .875rem; }
