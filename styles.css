@@ -29,3 +29,9 @@ article p:not(.platform) { color: #40536f; font-size: .92rem; margin: .35rem 0 .
 summary { cursor: pointer; max-width: max-content; }
 code { overflow-wrap: anywhere; font-size: .75rem; }
 footer { border-top: 1px solid #cbd8e9; padding-block: 1.1rem 1.6rem; font-size: .875rem; }
+
+.contact { border-top: 1px solid #cbd8e9; margin-top: 2.4rem; padding-top: 1.4rem; }
+.contact address { font-style: normal; }
+.contact dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 215px), 1fr)); gap: 1rem; margin: .8rem 0 0; }
+.contact dt { color: #40536f; font-size: .82rem; }
+.contact dd { margin: .2rem 0 0; overflow-wrap: anywhere; }

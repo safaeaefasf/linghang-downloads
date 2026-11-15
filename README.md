@@ -1,4 +1,4 @@
-# 软件下载
+# LingHang AI Bot Studio
 
 [打开下载页面](https://safaeaefasf.github.io/linghang-downloads/) · [查看发布附件](https://github.com/safaeaefasf/linghang-downloads/releases)
 
