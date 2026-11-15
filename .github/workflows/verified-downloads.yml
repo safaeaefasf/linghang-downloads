@@ -50,22 +50,26 @@ jobs:
               --title '领航公开版备用下载' \
               --notes 'Windows 6.6.1、Android 6.6.6、Mac 6.6.1 和 Chrome／Edge 6.6.3。附件同时提供对应源码及适用的构建说明。'
           fi
+          release_data() {
+            gh api "repos/$GH_REPO/releases?per_page=30" \
+              --jq ".[] | select(.tag_name == \"$RELEASE_TAG\")"
+          }
           while read -r filename hash bytes; do
-            assets="$(gh release view "$RELEASE_TAG" --json assets,isDraft)"
+            assets="$(release_data)"
             if jq -e --arg name "$filename" '.assets[] | select(.name == $name)' <<< "$assets" >/dev/null; then
               jq -e --arg name "$filename" --arg hash "sha256:$hash" --argjson bytes "$bytes" \
                 '.assets[] | select(.name == $name and .digest == $hash and .size == $bytes and .state == "uploaded")' <<< "$assets" >/dev/null
             else
-              jq -e '.isDraft == true' <<< "$assets" >/dev/null
+              jq -e '.draft == true' <<< "$assets" >/dev/null
               gh release upload "$RELEASE_TAG" "$filename"
             fi
           done < "$RUNNER_TEMP/download-inventory"
-          assets="$(gh release view "$RELEASE_TAG" --json assets,isDraft)"
+          assets="$(release_data)"
           while read -r filename hash bytes; do
             jq -e --arg name "$filename" --arg hash "sha256:$hash" --argjson bytes "$bytes" \
               '.assets[] | select(.name == $name and .digest == $hash and .size == $bytes and .state == "uploaded")' <<< "$assets" >/dev/null
           done < "$RUNNER_TEMP/download-inventory"
-          if jq -e '.isDraft == true' <<< "$assets" >/dev/null; then
+          if jq -e '.draft == true' <<< "$assets" >/dev/null; then
             gh release edit "$RELEASE_TAG" --draft=false --latest
           fi
           gh release view "$RELEASE_TAG" --json url,isDraft,assets \
