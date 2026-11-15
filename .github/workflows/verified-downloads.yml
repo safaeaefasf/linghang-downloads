@@ -25,7 +25,7 @@ jobs:
               .id == 445803395 and .tag_name == $tag and .draft == true
               and .target_commitish == "170a826e84ad0abeaea3ef85db53055aa1ec3e09"
             ' >/dev/null
-      - name: Download and verify public binaries and corresponding source
+      - name: Download and verify public binaries
         shell: bash
         run: |
           set -euo pipefail
@@ -45,11 +45,6 @@ jobs:
           verify linghang-6.6.6-android-arm64-release.apk e08a5ad84e331e3dfe28dd541b7d66e2cd2fd4de768ec724eacdc5fbcb4e5a89 96332167
           verify Linghang-6.6.1-macos-universal.dmg e4fa92c7b98da1511b2a3d47ff45632d4148f391369fd48f7657f1d8c3d77991 78342978 Linghang-6.6.1-6060105-macos-universal.dmg
           verify linghang-browser-6.6.3.zip e5c5bc94d6dc41b70ab8fdc4af4e2d16db1b559f6a07458684ec07521cfc5d1c 607504
-          verify Linghang-Windows-6.6.1-f5f4a2c-source.zip 4d32f80c015cbb17291bbbfa613439a8d11f8cddf65a1f7ded2bac653dd4d0bf 226325226
-          verify Linghang-Windows-6.6.1-f5f4a2c-build-tools.zip a52dfafddf4872c050518f4ba45e3a2bab5052bd29d9262223009ef5821bd1fe 86812
-          verify linghang-client-6.6.6-6060605-android-source.zip a1c7354761bd02d09b442919e4654c63c6757c9f46b132c668432fd71a046ab9 165648835
-          verify Linghang-macOS-6.6.1-6060105-source.zip 33d3d7dca14076d199d8bdb0299a6d0a00c3a21bd0ec3623cf9f0b8bcbe06d6d 170821981
-          verify linghang-browser-6.6.3-source-materials.zip 39b328a6f2fe7e94a3efe42ec1d007e702949f3921d87d228380d350ab0446c8 837062
       - name: Upload, verify, and publish release
         shell: bash
         run: |
@@ -80,6 +75,6 @@ jobs:
               .assets | any(.name == $name and .digest == $hash and .size == $bytes and .state == "uploaded")
             ' <<< "$release" >/dev/null
           done < "$RUNNER_TEMP/download-inventory"
-          jq -e '.assets | length == 9' <<< "$release" >/dev/null
+          jq -e '.assets | length == 4' <<< "$release" >/dev/null
           gh api --method PATCH "$release_path" -F draft=false -f make_latest=true |
             jq -e --arg tag "$RELEASE_TAG" 'select(.tag_name == $tag and .draft == false) | {html_url, tag_name, assetCount: (.assets | length)}'
