@@ -1,0 +1,72 @@
+name: Mirror verified downloads
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: verified-download-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: downloads-20261115
+    steps:
+      - name: Download and verify public binaries and corresponding source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/verified-downloads"
+          cd "$RUNNER_TEMP/verified-downloads"
+          verify() {
+            local filename="$1" hash="$2" bytes="$3" remote="${4:-$1}"
+            curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' \
+              --connect-timeout 15 --max-time 400 --retry 2 --limit-rate 1250k \
+              "https://node.linghang.world/downloads/$remote" --output "$filename"
+            test "$(stat -c %s "$filename")" -eq "$bytes"
+            printf '%s  %s\n' "$hash" "$filename" | sha256sum --check --status
+            printf '%s %s %s\n' "$filename" "$hash" "$bytes" >> "$RUNNER_TEMP/download-inventory"
+            printf 'Verified %s (%s bytes)\n' "$filename" "$bytes"
+          }
+          verify Linghang-Setup-6.6.1-win-x64.exe 69d143ffda6fa335d154a69e7696828718e9b257166aa3f0385bc0ea98ee7a90 205117952
+          verify linghang-6.6.6-android-arm64-release.apk e08a5ad84e331e3dfe28dd541b7d66e2cd2fd4de768ec724eacdc5fbcb4e5a89 96332167
+          verify Linghang-6.6.1-macos-universal.dmg e4fa92c7b98da1511b2a3d47ff45632d4148f391369fd48f7657f1d8c3d77991 78342978 Linghang-6.6.1-6060105-macos-universal.dmg
+          verify linghang-browser-6.6.3.zip e5c5bc94d6dc41b70ab8fdc4af4e2d16db1b559f6a07458684ec07521cfc5d1c 607504
+          verify Linghang-Windows-6.6.1-f5f4a2c-source.zip 4d32f80c015cbb17291bbbfa613439a8d11f8cddf65a1f7ded2bac653dd4d0bf 226325226
+          verify Linghang-Windows-6.6.1-f5f4a2c-build-tools.zip a52dfafddf4872c050518f4ba45e3a2bab5052bd29d9262223009ef5821bd1fe 86812
+          verify linghang-client-6.6.6-6060605-android-source.zip a1c7354761bd02d09b442919e4654c63c6757c9f46b132c668432fd71a046ab9 165648835
+          verify Linghang-macOS-6.6.1-6060105-source.zip 33d3d7dca14076d199d8bdb0299a6d0a00c3a21bd0ec3623cf9f0b8bcbe06d6d 170821981
+          verify linghang-browser-6.6.3-source-materials.zip 39b328a6f2fe7e94a3efe42ec1d007e702949f3921d87d228380d350ab0446c8 837062
+      - name: Upload, verify, and publish release
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/verified-downloads"
+          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --draft --target "$GITHUB_SHA" \
+              --title '领航公开版备用下载' \
+              --notes 'Windows 6.6.1、Android 6.6.6、Mac 6.6.1 和 Chrome／Edge 6.6.3。附件同时提供对应源码及适用的构建说明。'
+          fi
+          while read -r filename hash bytes; do
+            assets="$(gh release view "$RELEASE_TAG" --json assets,isDraft)"
+            if jq -e --arg name "$filename" '.assets[] | select(.name == $name)' <<< "$assets" >/dev/null; then
+              jq -e --arg name "$filename" --arg hash "sha256:$hash" --argjson bytes "$bytes" \
+                '.assets[] | select(.name == $name and .digest == $hash and .size == $bytes and .state == "uploaded")' <<< "$assets" >/dev/null
+            else
+              jq -e '.isDraft == true' <<< "$assets" >/dev/null
+              gh release upload "$RELEASE_TAG" "$filename"
+            fi
+          done < "$RUNNER_TEMP/download-inventory"
+          assets="$(gh release view "$RELEASE_TAG" --json assets,isDraft)"
+          while read -r filename hash bytes; do
+            jq -e --arg name "$filename" --arg hash "sha256:$hash" --argjson bytes "$bytes" \
+              '.assets[] | select(.name == $name and .digest == $hash and .size == $bytes and .state == "uploaded")' <<< "$assets" >/dev/null
+          done < "$RUNNER_TEMP/download-inventory"
+          if jq -e '.isDraft == true' <<< "$assets" >/dev/null; then
+            gh release edit "$RELEASE_TAG" --draft=false --latest
+          fi
+          gh release view "$RELEASE_TAG" --json url,isDraft,assets \
+            --jq '{url,isDraft,assets:[.assets[] | {name,size,digest}]}'
