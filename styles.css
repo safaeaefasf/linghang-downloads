@@ -8,7 +8,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; }
 a { color: #2257a2; text-underline-offset: .2em; }
-a:focus-visible, summary:focus-visible { outline: 3px solid #3685d8; outline-offset: 4px; }
+a:focus-visible { outline: 3px solid #3685d8; outline-offset: 4px; }
 .top, main, footer { max-width: 1120px; margin: auto; padding-inline: clamp(1rem, 4vw, 3rem); }
 .top { display: flex; align-items: center; justify-content: space-between; min-height: 76px; border-bottom: 1px solid #cbd8e9; }
 .top a { font-size: .875rem; text-decoration: none; }
@@ -24,10 +24,8 @@ article p:not(.platform) { color: #40536f; font-size: .92rem; margin: .35rem 0 .
 .download { display: flex; justify-content: space-between; gap: .75rem; border-radius: .58rem; background: #163c74; color: white; font-weight: 675; text-decoration: none; padding: .56rem .7rem; }
 .download:hover { background: #215392; }
 .download span { font-weight: 480; white-space: nowrap; }
-.secondary, details { margin-top: .65rem; font-size: .83rem; }
+.secondary { margin-top: .65rem; font-size: .83rem; }
 .secondary { display: block; }
-summary { cursor: pointer; max-width: max-content; }
-code { overflow-wrap: anywhere; font-size: .75rem; }
 footer { border-top: 1px solid #cbd8e9; padding-block: 1.1rem 1.6rem; font-size: .875rem; }
 
 .contact { border-top: 1px solid #cbd8e9; margin-top: 2.4rem; padding-top: 1.4rem; }
