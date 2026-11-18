@@ -1,0 +1,88 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>帮助与在线客服（备用页面） · 领航</title><style>*{box-sizing:border-box}body{margin:0;padding:clamp(16px,4vw,48px);background:#eef3f8;color:#172942;font:16px/1.55 "Segoe UI",system-ui,sans-serif}.dedicated-page{background:white;border-radius:20px;padding:clamp(16px,4vw,36px);box-shadow:0 6px 28px #18395512}.page-heading h1{font-size:clamp(23px,5vw,32px);margin:0 0 .4em}.primary-button,.secondary-button{display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:9px;font:inherit;text-decoration:none;cursor:pointer}.primary-button{background:#173552;color:white;border:1px solid #173552}.secondary-button{color:#173552;background:white;border:1px solid #a9b7c7}.dedicated-choice:has(input:checked){background:#edf5ff}.field-hint{color:#385370;font-size:.88em}.support-address{color:#153955}
+.offline-help { max-width: 680px; margin-inline: auto; overflow-wrap: anywhere; }
+.offline-help h2 { margin: 1.4em 0 .55em; font-size: 1.15em; }
+.offline-help p { line-height: 1.6; }
+.offline-filters { display: flex; align-items: end; gap: .7em; flex-wrap: wrap; margin: .8em 0; }
+.offline-filters label { flex: 1 1 140px; }
+.offline-field { display: block; margin: .65em 0; }
+.offline-help input, .offline-help select, .offline-help textarea { display: block; width: 100%; padding: .65em; margin-top: .3em; font: inherit; border: 1px solid var(--line,#ccd2da); border-radius: 8px; box-sizing: border-box; }
+.offline-faq { border-block-end: 1px solid var(--line,#ccd2da); padding: .7em 0; }
+.offline-faq summary { cursor: pointer; font-weight: 600; }
+.offline-help [hidden] { display: none; }
+.help-channel-actions { display: flex; gap: .6em; align-items: center; flex-wrap: wrap; }
+.help-channel-actions > button, .help-channel-actions > a { width: auto; margin: 0; min-height: 44px; }
+
+.offline-help{background:#fff;border-radius:18px;padding:clamp(16px,4vw,34px)}
+.support-address{user-select:all;-webkit-user-select:all}.offline-help [data-copy-support]{margin:.4em}
+</style></head><body><section id="page-offline-help" class="page detail-page offline-help" aria-labelledby="offline-help-title">
+        <div class="page-heading"><h1 id="offline-help-title">帮助与在线客服（备用页面）</h1></div><p class="support-language">我们的客服不受语言影响，任意地区的用户可以随意联系任意一种联系方式。</p>
+        <p>这里保存了领航客服页的常见问题和联系方式。可在本页查找答案或复制客服联系方式。</p>
+        <h2>常见问题与尝试自助解决</h2>
+        <div class="offline-filters"><label>搜索问题<input type="search" id="offline-query" placeholder="例如连接、付款、密码"></label>
+        <label>问题分类<select id="offline-topic"><option>全部</option><option>连接</option><option>会员与付款</option><option>账户</option><option>安装</option></select></label></div>
+        <div id="offline-faqs"><details class="offline-faq" data-topic="连接"><summary>连接后网页仍打不开怎么办？</summary><p>先断开后重新连接，并检查普通网络是否可用。仍有问题时，请记录发生时间、设备平台和页面提示，提交客服核对。</p></details><details class="offline-faq" data-topic="会员与付款"><summary>付款后会员还未更新怎么办？</summary><p>回到“账户与订单”点击付款核验。仍未开通或显示待核对时，请保留订单号联系客服，避免重复付款。</p></details><details class="offline-faq" data-topic="账户"><summary>登录时填写邮箱还是用户名？</summary><p>请填写注册时设置的用户名。接收回复或订单邮件的邮箱，不等于登录用户名。</p></details><details class="offline-faq" data-topic="会员与付款"><summary>青铜与铂金会员有什么区别？</summary><p>青铜自动匹配可用线路；铂金支持自主选择可用国家线路。安全模式与极速模式尚未开放，当前版本使用自动模式。</p></details><details class="offline-faq" data-topic="账户"><summary>忘记密码后可以查询原密码吗？</summary><p>不能查询原密码。可在核对身份后设置新密码，具体恢复流程仍待确认，请先提交问题说明情况。</p></details><details class="offline-faq" data-topic="会员与付款"><summary>美元价格如何用支付宝结算？</summary><p>套餐显示 USD，支付宝按固定汇率 1 USD = 6.69 CNY 结算。例如青铜 1 周 USD 2.29，人民币为 ¥15.32。</p></details><details class="offline-faq" data-topic="账户"><summary>一个账号可以使用多台设备吗？</summary><p>标准方案支持同一账号使用多台设备，不要求所有设备固定使用同一节点。可用线路取决于会员档位。</p></details><details class="offline-faq" data-topic="安装"><summary>在哪里下载和安装客户端？</summary><p>请通过官网对应平台入口查看版本状态与安装指引。Mac 与 iPhone 的安装渠道和当前版本请查看下载页；浏览器扩展由官网下载 ZIP 后按指引加载。</p></details><details class="offline-faq" data-topic="会员与付款"><summary>续费或升级铂金如何处理？</summary><p>同档续费追加会员时长。有效青铜升级铂金需先核对剩余权益折抵与补款，付款确认后立即生效。</p></details><details class="offline-faq" data-topic="连接"><summary>怎样提交问题更便于核对？</summary><p>请说明设备平台、客户端版本、发生时间与页面提示，可附已遮挡敏感信息的截图。不要发送密码、完整密钥或二维码。</p></details><details class="offline-faq" data-topic="会员与付款"><summary>如何申请退款？</summary><p>遇到重复扣款、付款后未开通或升级金额异常，请提交本人订单号、付款时间和退款原因，必要时附脱敏凭证。客服核对后会告知处理结果；请在原订单和支付渠道查看实际退款状态。 查看退款与异常订单说明</p></details></div><p id="offline-count" class="field-hint" aria-live="polite">共 11 项</p>
+        <h2>联系客服</h2><p class="offline-offices">LingHang AI Bot Studio（领航Ai Bot）</p><ul><li>台湾办公室 LINE H680H</li><li>英国办公室 WhatsApp +44 7882 782863</li><li>美国办公室 Telegram +1 680 800 9188</li></ul><div class="offline-contact"><span>统一客服邮箱</span> <span class="support-address" dir="ltr">delivery@linghang.world</span> <button class="secondary-button" data-copy-support type="button">复制邮箱</button><p data-copy-message class="field-hint" role="status"></p></div>
+        <h2>把问题告诉我们</h2><p>可以先填写并复制问题，再用自己的邮箱发给客服。截图可作为邮件附件。请勿填写密码或密钥。</p>
+        <div class="offline-filters"><label>问题类型<select id="offline-category"><option>连接问题</option><option>会员与付款</option><option>账户与密码</option><option>下载与安装</option><option>合作</option><option>其他</option></select></label><label>设备平台<select id="offline-platform"><option value="">请选择</option><option>Android</option><option>Windows</option><option>iPhone</option><option>Mac</option><option>浏览器扩展</option><option>官网</option><option>合作的后台</option><option>合作专属页</option></select></label></div>
+        <label class="offline-field">问题标题<input id="offline-subject" type="text" maxlength="140"></label>
+        <label class="offline-field">问题描述<textarea id="offline-description" maxlength="4000" rows="4" placeholder="请说明发生时间、操作步骤和页面提示。"></textarea></label>
+        <button class="secondary-button" type="button" id="offline-prepare">复制问题内容</button>
+        <p id="offline-result" class="field-hint" role="status"></p><textarea id="offline-manual" readonly rows="4" aria-label="可手动复制的问题内容" hidden></textarea>
+        <h2>应用下载</h2><p><a href="https://safaeaefasf.github.io/linghang-downloads/">https://safaeaefasf.github.io/linghang-downloads/</a></p><h2>我的工单</h2><p>提交工单、上传截图和查询回复需要连接在线客服。通过邮件联系时，可在自己的收件箱查看回复。</p>
+        </section><script>for (const copyButton of document.querySelectorAll('[data-copy-support]')) {
+  copyButton.addEventListener('click', async () => {
+    const card = copyButton.closest('.offline-contact');
+    const address = card.querySelector('.support-address');
+    const message = card.querySelector('[data-copy-message]');
+    try {
+      await navigator.clipboard.writeText(address.textContent.trim());
+      message.textContent = '客服邮箱已复制。';
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(address);
+      const selection = window.getSelection();
+      if (selection) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      message.textContent = '请手动复制上方邮箱地址。';
+    }
+  });
+}
+
+const offlinePage = document.getElementById('page-offline-help');
+const offlineQuery = document.getElementById('offline-query');
+const offlineTopic = document.getElementById('offline-topic');
+function filterOfflineQuestions() {
+  const query = offlineQuery.value.trim().toLowerCase();
+  let matches = 0;
+  for (const faq of offlinePage.querySelectorAll('.offline-faq')) {
+    faq.hidden = (offlineTopic.value !== '全部' && faq.dataset.topic !== offlineTopic.value) ||
+      !faq.textContent.toLowerCase().includes(query);
+    if (!faq.hidden) matches++;
+  }
+  document.getElementById('offline-count').textContent = matches ? '共 ' + matches + ' 项' : '没有找到相关问题，可以换个词或直接联系邮件客服。';
+}
+offlineQuery.addEventListener('input', filterOfflineQuestions);
+offlineTopic.addEventListener('change', filterOfflineQuestions);
+document.getElementById('offline-prepare').addEventListener('click', async () => {
+  const value = id => document.getElementById(id).value.trim();
+  const subject = value('offline-subject');
+  const detail = value('offline-description');
+  const message = document.getElementById('offline-result');
+  const manual = document.getElementById('offline-manual');
+  manual.hidden = true;
+  if (!subject && !detail) {
+    message.textContent = '请先填写问题标题或描述。';
+    document.getElementById('offline-subject').focus(); return;
+  }
+  const body = [subject, value('offline-category'), value('offline-platform'), detail].filter(Boolean).join('\n');
+  try {
+    await navigator.clipboard.writeText(body);
+    message.textContent = '问题已复制，请粘贴到邮件中发给客服。';
+  } catch {
+    manual.value = body; manual.hidden = false; manual.focus(); manual.select();
+    message.textContent = '请手动复制下方内容，再通过邮件发送。';
+  }
+});
+</script></body></html>
